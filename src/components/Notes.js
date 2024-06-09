@@ -5,24 +5,28 @@ import AddNote from './AddNote';
 
 function Notes() {
   const context = useContext(contextValue);
-  const { notes, getNotes } = context;
-  const [note, setNote] = useState({etitle:"", edescription:"", etag:""});
+  const { notes, getNotes , editNote} = context;
+  const [note, setNote] = useState({id:"", etitle:"", edescription:"", etag:""});
   useEffect(() => {
     getNotes();
     // eslint-disable-next-line
   }, [])
  const updateNote=(currNote)=>{
       ref.current.click();
-      setNote({etitle: currNote.title, edescription: currNote.description, etag: currNote.tag})
+      setNote({id: currNote._id ,etitle: currNote.title, edescription: currNote.description, etag: currNote.tag})
  }
  const ref = useRef(null);
- const handleClick = (e)=>{
-  e.preventDefault();
+ const refClose = useRef(null);
+
+ const handleClick = ()=>{
+  editNote(note.id, note.etitle, note.edescription, note.etag);
+  refClose.current.click();
  
 }
 const onchange = (e)=>{
    setNote({...note, [e.target.name]: e.target.value});
 }
+
   return (
     <>
       <button ref = {ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -80,7 +84,7 @@ const onchange = (e)=>{
         </form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button ref={refClose}  type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="button" className="btn btn-primary" onClick={handleClick} >Update Note</button>
             </div>
           </div>

@@ -75,24 +75,26 @@ const NoteState = (props) => {
   const editNote = async (id, title, description, tag) => {
     // API CALL
     const response = await fetch(`${host}/api/notes/updatenotes/${id}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         authtoken:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY2MWQ4MzNiNzZhZjM5NzgzYWM1YjcyIn0sImlhdCI6MTcxNzc1MzI2OH0.JJlxD1xIVSgMYVbiivx9VpX0FO0NetVATJxZZfItqJA",
       },
-      body: JSON.stringify({title, description,tag}),
+      body: JSON.stringify({title, description,tag})
     });
     const json = await response.json();
     console.log(json)
-    for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
-      if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
-      }
-    }
+    
+    getNotes();
+    // for (let index = 0; index < notes.length; index++) {
+    //   const element = notes[index];
+    //   if (element._id === id) {
+    //     element.title = title;
+    //     element.description = description;
+    //     element.tag = tag;
+    //   }
+    // }
   };
   return (
     <NoteContext.Provider
