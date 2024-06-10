@@ -12,8 +12,7 @@ const NoteState = (props) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authtoken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY2MWQ4MzNiNzZhZjM5NzgzYWM1YjcyIn0sImlhdCI6MTcxNzc1MzI2OH0.JJlxD1xIVSgMYVbiivx9VpX0FO0NetVATJxZZfItqJA",
+      "authtoken": localStorage.getItem('token')
     }
   });
   const json = await response.json();
@@ -28,8 +27,7 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authtoken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY2MWQ4MzNiNzZhZjM5NzgzYWM1YjcyIn0sImlhdCI6MTcxNzc1MzI2OH0.JJlxD1xIVSgMYVbiivx9VpX0FO0NetVATJxZZfItqJA",
+        "authtoken": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -45,11 +43,12 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        authtoken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY2MWQ4MzNiNzZhZjM5NzgzYWM1YjcyIn0sImlhdCI6MTcxNzc1MzI2OH0.JJlxD1xIVSgMYVbiivx9VpX0FO0NetVATJxZZfItqJA",
+        "authtoken": localStorage.getItem('token')
       }
     });
+     // eslint-disable-next-line
     const json = await response.json();
+    
     const newNote = notes.filter((note) => {
       return note._id !== id;
     });
@@ -64,13 +63,15 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        authtoken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY2MWQ4MzNiNzZhZjM5NzgzYWM1YjcyIn0sImlhdCI6MTcxNzc1MzI2OH0.JJlxD1xIVSgMYVbiivx9VpX0FO0NetVATJxZZfItqJA",
+        "authtoken": localStorage.getItem('token')
       },
       body: JSON.stringify({title, description,tag})
     });
+     // eslint-disable-next-line
     const json = await response.json();
+    
     getNotes();
+
   };
   return (
     <NoteContext.Provider
