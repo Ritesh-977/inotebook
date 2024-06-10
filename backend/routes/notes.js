@@ -20,7 +20,7 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
 // Route 2: ADD a Note using POST
 router.post( "/addnotes", fetchuser,[
     body("title", "Enter a valid Name").isLength({ min: 3 }),
-    body("description", "Enter a valid Password").isLength({ min: 6 }),
+    body("description", "Enter a valid Password").isLength({ min: 5 }),
   ], async (req, res) => {
     // Check errors
     try {
